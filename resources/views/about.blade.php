@@ -12,7 +12,7 @@
         <h1>
             АГРОСТЕЙ — АГРегатор новоСТЕЙ
         </h1>
-        <?php include "menu.php" ?>
+        @include('menu')
     </header>
     <div class="main">
         <p>

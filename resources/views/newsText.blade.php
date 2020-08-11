@@ -10,11 +10,14 @@
         <h1>
             АГРОСТЕЙ — АГРегатор новоСТЕЙ
         </h1>
-        <?php include "menu.php" ?>
+        @include('menu')
     </header>
     <div class="main">
+        <h2>
+            {{ $newsText['title'] }}
+        </h2>
         <p>
-            Добро пожаловать! Мы — самый лучший и самый оперативный агрегатор хороших новостей в интернете
+            {{ $newsText['text'] }}
         </p>
     </div>
 </body>

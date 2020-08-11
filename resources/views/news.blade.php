@@ -10,16 +10,16 @@
         <h1>
             АГРОСТЕЙ — АГРегатор новоСТЕЙ
         </h1>
-        <?php include "menu.php" ?>
+        @include('menu')
     </header>
     <div class="main">
         <h2>
-            <?= $category['name'] ?>
+            Новости
         </h2>
         <ul>
-            <?php foreach($newsList as $item): ?>
+            <?php foreach ($news as $item): ?>
                 <li>
-                    <a href="<?= route('NewsById', str_replace(' ', '_', transliterator_transliterate('Russian-Latin/BGN; Lower()', $item[1]))) ?>/"><?= $item[1] ?></a>
+                    <a href="<?= route('NewsById', str_replace(' ', '_', transliterator_transliterate('Russian-Latin/BGN; Lower()', $item['title']))) ?>/">{{ $item['title'] }}</a>
                 </li>
             <?php endforeach; ?>
         </ul>
