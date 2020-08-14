@@ -22,7 +22,7 @@ Route::group([
                 'as'        => 'admin.'
             ],
     function() {
-        Route::get('/login/', 'AdminController@login')->name('Login');
+        Route::post('/login/', 'AdminController@login')->name('Login');
         Route::get('/', 'AdminController@index')->name('Admin');
         Route::get('/add-news/', 'AdminController@addNews')->name('Add-News');
     }    
