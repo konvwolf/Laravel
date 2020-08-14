@@ -11,6 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => '/'], function() {
+    Route::get('', 'HomeController@index')->name('Home');
+    Route::get('about', 'HomeController@about')->name('About');
+});
+
+Route::group([
+                'prefix' => 'news',
+                'namespace' => 'News'
+            ],
+    function() {
+        Route::get('/', 'NewsController@index')->name('News');
+        Route::get('/{id}/', 'NewsController@show')->name('NewsById');
+});
+
+Route::group([
+                'prefix' => 'categories',
+                'namespace' => 'News'
+            ],
+    function() {
+        Route::get('/', 'NewsCategoriesController@index')->name('Categories');
+        Route::get('/{id}/', 'NewsCategoriesController@show')->name('CategoryByName');
 });
