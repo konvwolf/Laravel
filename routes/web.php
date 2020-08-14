@@ -17,8 +17,21 @@ Route::group(['prefix' => '/'], function() {
 });
 
 Route::group([
-                'prefix' => 'news',
-                'namespace' => 'News'
+                'prefix'    =>'admin',
+                'namespace' =>'Admin',
+                'as'        => 'admin.'
+            ],
+    function() {
+        Route::get('/login/', 'AdminController@login')->name('Login');
+        Route::get('/', 'AdminController@index')->name('Admin');
+        Route::get('/add-news/', 'AdminController@addNews')->name('Add-News');
+    }    
+);
+
+Route::group([
+                'prefix'    => 'news',
+                'namespace' => 'News',
+                'as'        => 'news.'
             ],
     function() {
         Route::get('/', 'NewsController@index')->name('News');
@@ -26,8 +39,9 @@ Route::group([
 });
 
 Route::group([
-                'prefix' => 'categories',
-                'namespace' => 'News'
+                'prefix'    => 'categories',
+                'namespace' => 'News',
+                'as'        => 'news-categories.'
             ],
     function() {
         Route::get('/', 'NewsCategoriesController@index')->name('Categories');
