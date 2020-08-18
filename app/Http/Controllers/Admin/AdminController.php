@@ -20,14 +20,14 @@ class AdminController extends Controller
                 return redirect()->route('admin.Add-News');
             }
 
-            $news = json_decode(File::get(storage_path('app/public/news.json')), true);
+            $news = json_decode(File::get(base_path('files/news.json')), true);
             $news[] = [
                         'id'        => random_int(1000, 9999),
                         'title'     => $request->input('news-name'),
                         'text'      => $request->input('news-text'),
                         'category'  => $request->input('category')
                       ];
-            File::put(storage_path('app/public/news.json'), json_encode($news));
+            File::put(base_path('files/news.json'), json_encode($news));
             return redirect()->route('news.News');
         }
 
