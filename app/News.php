@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -41,6 +42,12 @@ class News extends Model
     }
 
     public static function getNewsId($title) {
-        return static::$news[array_search(transliterator_transliterate('Russian/BGN', ucfirst(str_replace('_', ' ', $title))), array_column(static::$news, 'title'))];
+        // Пришлось отказаться от функции array_search, поскольку в случае false она возвращает 0, который при соответствует массиву с ключом 0
+        $newsId = Str::before($title, '---');
+        foreach(static::$news as $item) {
+            if($item['id'] == $newsId) {
+                return $item;
+            };
+        }
     }
 }
