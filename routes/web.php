@@ -14,6 +14,7 @@
 Route::group(['prefix' => '/'], function() {
     Route::get('', 'HomeController@index')->name('Home');
     Route::get('about', 'HomeController@about')->name('About');
+    Route::match(['get','post'], 'login/', 'HomeController@login')->name('Login');
 });
 
 Route::group([
@@ -22,9 +23,8 @@ Route::group([
                 'as'        => 'admin.'
             ],
     function() {
-        Route::post('/login/', 'AdminController@login')->name('Login');
         Route::get('/', 'AdminController@index')->name('Admin');
-        Route::get('/add-news/', 'AdminController@addNews')->name('Add-News');
+        Route::match(['get', 'post'], '/add-news/', 'AdminController@create')->name('Add-News');
     }    
 );
 

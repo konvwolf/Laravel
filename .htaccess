@@ -1,4 +1,3 @@
-DirectoryIndex /public/index.php
-RewriteEngine On
-RewriteCond %{REQUEST_URI} ^/index.php
-RewriteRule ^index.php(.*)$ /public/index.php [L]
+RewriteEngine on
+RewriteRule ^$ public/ [L]
+RewriteRule ((?s).*) public/$1 [L]
