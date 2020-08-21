@@ -13,4 +13,13 @@ class HomeController extends Controller
     public function about() {
         return view('about');
     }
+
+    public function login(Request $request) {
+        if ($request->isMethod('post')) {
+            dump($request->all());
+            return redirect()->route('admin.Admin');
+        }
+
+        return view('login');
+    }
 }
