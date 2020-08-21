@@ -17,7 +17,7 @@
             <a class="nav-link" href="{{ route('news.News') }}/">Новости</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('news-categories.Categories') }}/">Категории</a>
+            <a class="nav-link" href="{{ route('news.Categories') }}/">Категории</a>
         </li>
         @if($userAdmin = 1) {{-- Имитирую, что админ залогинен --}}
             <li class="nav-item">

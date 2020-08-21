@@ -6,7 +6,7 @@
     <ul class="newsCategories">
         @forelse($categories as $item)
             <li>
-                <a href="{{ route('news-categories.CategoryByName', $item['slug']) }}/">{{ $item['name'] }}</a>
+                <a href="{{ route('news.CategoryByName', $item->slug) }}/">{{ $item->name }}</a>
             </li>
         @empty
             Здесь пока нет ни одной категории
