@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CategoriesSeeder extends Seeder
 {
@@ -18,13 +19,18 @@ class CategoriesSeeder extends Seeder
         $categories = [
             [
                 'id'    => 1,
-                'name' => 'Велоспорт',
-                'slug'  => 'velosport'
+                'name'  => 'Велоспорт',
+                'slug'  => Str::slug('Велоспорт')
             ],
             [
                 'id'    => 2,
-                'name' => 'Здоровье',
-                'slug'  => 'zdorovie'
+                'name'  => 'Здоровье',
+                'slug'  => Str::slug('Здоровье')
+            ],
+            [
+                'id'    => 3,
+                'name'  => 'Бег и прыг',
+                'slug'  => Str::slug('Бег и прыг')
             ]
         ];
 
