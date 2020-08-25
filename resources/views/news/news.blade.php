@@ -14,4 +14,5 @@
             </p>
         @endforelse
     </ul>
+    {{ $news->links() }}
 @endsection
