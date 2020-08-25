@@ -5,17 +5,14 @@ namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use App\NewsCategories;
 use Illuminate\Http\Request;
-use App\News;
 
 class NewsCategoriesController extends Controller
 {
     public function index() {
-        return view('news.newsCategories')->with('categories', NewsCategories::all());
+        return view('news.newsCategories')->with('categories', NewsCategories::getCategories());
     }
 
     public function show($name) {
-        $category   = NewsCategories::where('slug', $name)->first();
-        $news       = News::where('category', $category->id)->paginate(10);
-        return view('news.newsCategory', ['category' => $category, 'newsList' => $news]);
+        return view('news.newsCategory', ['category' => NewsCategories::getCategoryName($name), 'newsList' => NewsCategories::getNewsInCategory($name)]);
     }
 }

@@ -1,26 +1,17 @@
 @extends('layouts.page')
 @section('content')
-    @empty($newsText)
-        <h2>
+    <img src="{{ asset($newsText->image) }}" alt="Image" class="newsImage">
+    <h2>
+        @empty($newsText)
             Такой новости у нас нет
-        </h2>
-    @else
-        @if($newsText->isPrivate == 1)
-            <img src="{{ asset($newsText->image) }}" alt="Image" class="newsImage">
-            <h2>
-                {{ $newsText->title }}
-            </h2>
-            <p>
-                Зарегистрируйтесь, чтобы прочитать новость
-            </p>
         @else
-            <img src="{{ asset($newsText->image) }}" alt="Image" class="newsImage">
-            <h2>
-                {{ $newsText->title }}
-            </h2>
-            <p>
-                {{ $newsText->text }}
-            </p>
-        @endif
-    @endempty
+            {{ $newsText->title }}
+        @endempty
+    </h2>
+    <p>
+        @empty($newsText)
+        @else
+            {{ $newsText->text }}
+        @endempty
+    </p>
 @endsection

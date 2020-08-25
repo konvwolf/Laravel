@@ -24,10 +24,7 @@ Route::group([
             ],
     function() {
         Route::get('/', 'AdminController@index')->name('Admin');
-        Route::match(['get', 'post'], '/add-news/', 'AdminController@create')->name('Create-News');
-        Route::get('/get-news/', 'AdminController@read')->name('Read-News');
-        Route::any('/edit-news/{id}', 'AdminController@update')->name('Update-News');
-        Route::get('/delete-news/{id}/', 'AdminController@delete')->name('Delete-News');
+        Route::match(['get', 'post'], '/add-news/', 'AdminController@create')->name('Add-News');
     }    
 );
 
