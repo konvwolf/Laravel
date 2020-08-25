@@ -1,9 +1,10 @@
 @extends('layouts.page')
 @section('content')
-    <h2>
     @empty($newsText)
+        <h2>
             Такой новости у нас нет
         </h2>
+    @else
         @if($newsText->isPrivate == 1)
             <img src="{{ asset($newsText->image) }}" alt="Image" class="newsImage">
             <h2>
@@ -13,9 +14,9 @@
                 Зарегистрируйтесь, чтобы прочитать новость
             </p>
         @else
-    <p>
             <img src="{{ asset($newsText->image) }}" alt="Image" class="newsImage">
             <h2>
+                {{ $newsText->title }}
             </h2>
             <p>
                 {{ $newsText->text }}
