@@ -35,9 +35,6 @@
                 <label class="form-check-label" for="newsPrivate">Новость для зарегистрированных пользователей?</label>
             </div>
             <div class="input-group mb-3">
-                <input type="file" name="newsImage">
-            </div>
-            <div class="input-group mb-3">
                 <button type="submit" class="btn btn-dark">Отправить</button>
             </div>
         </div>
