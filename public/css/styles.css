@@ -41,3 +41,19 @@
 .input-group-text_width {
     width: 160px;
 }
+
+.newsImage {
+    margin-bottom: 30px;
+}
+
+.newsAdminEdit {
+    color: black;
+}
+
+.newsAdminDelete {
+    color: red;
+}
+
+.textAreaHeight {
+    height: 450px;
+}
