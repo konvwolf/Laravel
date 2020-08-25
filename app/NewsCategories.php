@@ -3,13 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use App\News;
 
 class NewsCategories extends Model
 {
     public static function categories() {
-        return json_decode(File::get(base_path('files/categories.json')), true);
+        return DB::table('categories')->get();
     }
 
     public static function getCategories() {
@@ -18,7 +18,7 @@ class NewsCategories extends Model
 
     public static function getCategoryName($name) {
         foreach(static::categories() as $category) {
-            if($category['slug'] == $name) {
+            if($category->slug == $name) {
                 return $category;
             }
         }
@@ -27,16 +27,16 @@ class NewsCategories extends Model
     public static function getNewsInCategory($name) {
         if(empty(static::getCategoryName($name))) {
             return [];
-        } else {
-            foreach(News::getNews() as $news) {
-                if ($news['category'] == static::getCategoryName($name)['id']) {
-                    $newsList[] = [
-                                    $news['id'],
-                                    $news['title']
-                                ];
-                }
-            }
-            return $newsList;
         }
+
+        foreach(News::getNews() as $news) {
+            if ($news->category == static::getCategoryName($name)->id) {
+                $newsList[] = [
+                                'id'    => $news->id,
+                                'title' => $news->title
+                            ];
+            }
+        }
+        return $newsList;
     }
 }

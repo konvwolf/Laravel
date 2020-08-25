@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\NewsCategories;
 
@@ -20,14 +21,21 @@ class AdminController extends Controller
                 return redirect()->route('admin.Add-News');
             }
 
-            $news = json_decode(File::get(base_path('files/news.json')), true);
+            $image = '';
+            if ($request->hasFile('newsImage')) {
+                $path = Storage::putFile('public/images', $request->file('newsImage'));
+                $image = Storage::url($path);
+            }
+
             $news[] = [
-                        'id'        => random_int(1000, 9999),
                         'title'     => $request->input('news-name'),
                         'text'      => $request->input('news-text'),
-                        'category'  => $request->input('category')
+                        'category'  => $request->input('category'),
+                        'image'     => $image
                       ];
-            File::put(base_path('files/news.json'), json_encode($news));
+            
+            DB::table('news')->insert($news);
+
             return redirect()->route('news.News');
         }
 

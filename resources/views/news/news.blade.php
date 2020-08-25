@@ -6,7 +6,7 @@
     <ul class="newsList">
         @forelse($news as $item)
             <li>
-                <a href="{{ route('news.NewsById', $item['id'] . '---' . Str::slug($item['title'])) }}/">{{ $item['title'] }}</a>
+                <a href="{{ route('news.NewsById', $item->id . '---' . Str::slug($item->title)) }}/">{{ $item->title }}</a>
             </li>
         @empty
             <p>
