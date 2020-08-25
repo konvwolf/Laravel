@@ -16,4 +16,5 @@
 
         @endforelse
     </ul>
+    {{ $newsList->links() }}
 @endsection

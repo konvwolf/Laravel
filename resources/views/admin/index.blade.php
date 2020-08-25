@@ -5,7 +5,10 @@
     @else
         <div class="adminActions">
             <p>
-                <a href="{{ route('admin.Add-News') }}/">Добавить новость</a>
+                <a href="{{ route('admin.Create-News') }}/">Добавить новость</a>
+            </p>
+            <p>
+                <a href="{{ route('admin.Read-News') }}/">Редактировать или удалить новость</a>
             </p>
         </div>
     @endif

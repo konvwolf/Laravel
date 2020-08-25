@@ -45,3 +45,15 @@
 .newsImage {
     margin-bottom: 30px;
 }
+
+.newsAdminEdit {
+    color: black;
+}
+
+.newsAdminDelete {
+    color: red;
+}
+
+.textAreaHeight {
+    height: 450px;
+}
