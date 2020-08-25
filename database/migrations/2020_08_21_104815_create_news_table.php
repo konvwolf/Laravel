@@ -15,8 +15,8 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('category')->unsigned()->nullable();
-            $table->foreign('category')->references('id')->on('categories')->onDelete('set null');
+            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
             $table->string('title', 255);
             $table->longText('text');
             $table->string('image', 100);

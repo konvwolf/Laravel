@@ -14,7 +14,7 @@ class AlterNewsTableAddFields extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->boolean('isPrivate');
+            $table->boolean('is_private');
             $table->timestamps();
         });
     }

@@ -31,7 +31,7 @@
                 <input type="file" name="newsImage">
             </div>
             <div class="input-group mb-3 form-check">
-                <input @if (old('isPrivate') == 1 || isset($news) && $news->isPrivate == 1) checked @endif name="isPrivate" class="form-check-input" type="checkbox" id="newsPrivate">
+                <input @if (old('isPrivate') == 1 || isset($news) && $news->is_private == 1) checked @endif name="isPrivate" class="form-check-input" type="checkbox" id="newsPrivate">
                 <label class="form-check-label" for="newsPrivate">Новость для зарегистрированных пользователей?</label>
             </div>
             <div class="input-group mb-3">

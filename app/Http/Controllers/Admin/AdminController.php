@@ -29,12 +29,12 @@ class AdminController extends Controller
                 $image  = Storage::url($path);
             }
 
-            $news->title      = $request->input('news-name');
-            $news->text       = $request->input('news-text');
-            $news->category   = $request->input('category');
-            $news->isPrivate  = $request->input('isPrivate') ? 1 : 0;
-            $news->image      = $image;
-            $news->created_at = Carbon::now();
+            $news->title       = $request->input('news-name');
+            $news->text        = $request->input('news-text');
+            $news->category    = $request->input('category');
+            $news->is_private  = $request->input('isPrivate') ? 1 : 0;
+            $news->image       = $image;
+            $news->created_at  = Carbon::now();
             $news->save();
 
             return redirect()->route('news.News');
@@ -62,11 +62,11 @@ class AdminController extends Controller
                 $news->image = $image;
             }
 
-            $news->title      = $request->input('news-name');
-            $news->text       = $request->input('news-text');
-            $news->category   = $request->input('category');
-            $news->isPrivate  = $request->input('isPrivate') ? 1 : 0;
-            $news->updated_at = Carbon::now();
+            $news->title       = $request->input('news-name');
+            $news->text        = $request->input('news-text');
+            $news->category    = $request->input('category');
+            $news->is_private  = $request->input('isPrivate') ? 1 : 0;
+            $news->updated_at  = Carbon::now();
             $news->save();
 
             return redirect()->route('news.News');
