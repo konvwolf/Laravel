@@ -18,12 +18,14 @@ class NewsSeeder extends Seeder
         $news = [];
         $faker = Faker\Factory::create('ru_RU');
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 35; $i++) {
             $news[] = [
                 'category'      => rand(1, 3),
                 'title'         => $faker->realText(rand(15, 50)),
                 'text'          => $faker->realText(rand(1000, 5000)),
-                'image'         => '/storage/images/test_image.jpg'
+                'image'         => '/storage/images/test_image.jpg',
+                'isPrivate'     => rand(0, 1),
+                'created_at'    => Carbon::now()
             ];
         }
 
