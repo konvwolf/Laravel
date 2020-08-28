@@ -7,76 +7,75 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\NewsCategories;
 use App\News;
-use Carbon\Carbon;
 
 class AdminController extends Controller
 {
     public function index() {
-        return view('admin.index');
+        return view('admin.index')->with('news', News::paginate(10));
     }
 
-    public function create(Request $request) {
-        if ($request->isMethod('post')) {
-            if (empty($request->input('news-name')) || empty($request->input('news-text'))) {
-                $request->flash();
-                return redirect()->route('admin.Add-News');
-            }
-
-            $news = new News;
-            $image = '';
-            if ($request->hasFile('newsImage')) {
-                $path   = Storage::putFile('public/images', $request->file('newsImage'));
-                $image  = Storage::url($path);
-            }
-
-            $news->title       = $request->input('news-name');
-            $news->text        = $request->input('news-text');
-            $news->category    = $request->input('category');
-            $news->is_private  = $request->input('isPrivate') ? 1 : 0;
-            $news->image       = $image;
-            $news->created_at  = Carbon::now();
-            $news->save();
-
-            return redirect()->route('news.News');
-        }
-
+    public function create() {
         return view('admin.add-news')->with('categories', NewsCategories::all());
     }
 
-    public function read() {
-        return view('admin.news-actions')->with('news', News::paginate(10));
-    }
-
-    public function update(Request $request, $id) {
+    public function store(Request $request) {
         if ($request->isMethod('post')) {
-            if (empty($request->input('news-name')) || empty($request->input('news-text'))) {
-                $request->flash();
-                return redirect()->route('admin.Add-News');
-            }
-
-            $news = News::find($id);
-            $image = '';
+            $news = new News;
+            $image = 'public/images/test_image.jpg';
             if ($request->hasFile('newsImage')) {
                 $path   = Storage::putFile('public/images', $request->file('newsImage'));
                 $image  = Storage::url($path);
-                $news->image = $image;
             }
 
             $news->title       = $request->input('news-name');
             $news->text        = $request->input('news-text');
-            $news->category    = $request->input('category');
+            $news->category_id = $request->input('category');
             $news->is_private  = $request->input('isPrivate') ? 1 : 0;
-            $news->updated_at  = Carbon::now();
-            $news->save();
+            $news->image       = $image;
 
-            return redirect()->route('news.News');
+            $request->validate(News::rules(), [], News::formNames());
+
+            $result = $news->save();
+
+            if($result) {
+                $message = 'Новость успешно добавлена';
+                return view('admin.add-news', ['news' => News::find($news->id), 'categories' => NewsCategories::all(), 'success' => $message]);
+            } else {
+                $message = 'Новость не добавлена';
+                return view('admin.add-news', ['categories' => NewsCategories::all(), 'error' => $message]);
+            }
         }
+    }
 
+    public function edit($id) {
         return view('admin.add-news', ['news' => News::find($id), 'categories' => NewsCategories::all()]);
     }
 
-    public function delete($id) {
+    public function update(Request $request) {
+        $news = News::find($request->input('news-id'));
+        if ($request->hasFile('newsImage')) {
+            $path   = Storage::putFile('public/images', $request->file('newsImage'));
+            $image  = Storage::url($path);
+            $news->image = $image;
+        }
+
+        $news->title       = $request->input('news-name');
+        $news->text        = $request->input('news-text');
+        $news->category_id = $request->input('category');
+        $news->is_private  = $request->input('isPrivate') ? 1 : 0;
+        $result = $news->save();
+
+        if($result) {
+            $message = 'Новость отредактирована успешно';
+            
+        } else {
+            $message = 'Изменения не сохранены';
+        }
+        return view('admin.add-news', ['news' => $news, 'categories' => NewsCategories::all(), 'success' => $message]);
+    }
+
+    public function destroy($id) {
         $news = News::find($id)->delete();
-        return redirect()->route('admin.Read-News');
+        return redirect()->route('admin.index');
     }
 }
