@@ -30,8 +30,15 @@
 }
 
 .adminActions {
+    margin-top: 20px;
     font-size: 20px;
     font-weight: 600;
+}
+
+.adminActions_links {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .loginForm {
@@ -47,7 +54,7 @@
 }
 
 .newsAdminEdit {
-    color: black;
+    color: white;
 }
 
 .newsAdminDelete {

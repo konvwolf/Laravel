@@ -21,7 +21,7 @@
         </li>
         @if($userAdmin = 1) {{-- Имитирую, что админ залогинен --}}
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.Admin') }}/">Админка</a>
+                <a class="nav-link" href="{{ route('admin.index') }}/">Админка</a>
             </li>
         @endif
       </ul>
